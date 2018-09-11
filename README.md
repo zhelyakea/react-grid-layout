@@ -46,9 +46,6 @@ RGL is React-only and does not require jQuery.
 1. [Minimum and Maximum Width/Height](https://strml.github.io/react-grid-layout/examples/9-min-max-wh.html)
 1. [Dynamic Minimum and Maximum Width/Height](https://strml.github.io/react-grid-layout/examples/10-dynamic-min-max-wh.html)
 1. [No Vertical Compacting (Free Movement)](https://strml.github.io/react-grid-layout/examples/11-no-vertical-compact.html)
-1. [Prevent Collision](https://strml.github.io/react-grid-layout/examples/12-prevent-collision.html)
-1. [Error Case](https://strml.github.io/react-grid-layout/examples/13-error-case.html)
-1. [Toolbox](https://strml.github.io/react-grid-layout/examples/14-toolbox.html)
 
 #### Projects Using React-Grid-Layout
 
@@ -112,11 +109,11 @@ produce a grid with three items where:
 - item `b` will be restricted to a minimum width of 2 grid blocks and a maximum width of 4 grid blocks
 - users will be able to freely drag and resize item `c`
 
-```js
-import GridLayout from 'react-grid-layout';
+```javascript
+var ReactGridLayout = require('react-grid-layout');
 
-class MyFirstGrid extends React.Component {
-  render() {
+var MyFirstGrid = React.createClass({
+  render: function() {
     // layout is an array of objects, see the demo for more complete usage
     var layout = [
       {i: 'a', x: 0, y: 0, w: 1, h: 2, static: true},
@@ -124,34 +121,33 @@ class MyFirstGrid extends React.Component {
       {i: 'c', x: 4, y: 0, w: 1, h: 2}
     ];
     return (
-      <GridLayout className="layout" layout={layout} cols={12} rowHeight={30} width={1200}>
+      <ReactGridLayout className="layout" layout={layout} cols={12} rowHeight={30} width={1200}>
         <div key="a">a</div>
         <div key="b">b</div>
         <div key="c">c</div>
-      </GridLayout>
+      </ReactGridLayout>
     )
   }
-}
+});
 ```
 
 You may also choose to set layout properties directly on the children:
 
-```js
-import GridLayout from 'react-grid-layout';
+```javascript
+var ReactGridLayout = require('react-grid-layout');
 
-class MyFirstGrid extends React.Component {
-  render() {
+var MyFirstGrid = React.createClass({
+  render: function () {
     return (
-      <GridLayout className="layout" cols={12} rowHeight={30} width={1200}>
+      <ReactGridLayout className="layout" cols={12} rowHeight={30} width={1200}>
         <div key="a" data-grid={{x: 0, y: 0, w: 1, h: 2, static: true}}>a</div>
         <div key="b" data-grid={{x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4}}>b</div>
         <div key="c" data-grid={{x: 4, y: 0, w: 1, h: 2}}>c</div>
-      </GridLayout>
+      </ReactGridLayout>
     )
   }
-}
+});
 ```
-
 ### Usage without Browserify/Webpack
 
 A module usable in a `<script>` tag is included [here](/dist/react-grid-layout.min.js). It uses a UMD shim and
@@ -161,23 +157,21 @@ excludes `React`, so it must be otherwise available in your application, either 
 
 To make RGL responsive, use the `<ResponsiveReactGridLayout>` element:
 
-```js
-import { Responsive as ResponsiveGridLayout } from 'react-grid-layout';
-
-class MyResponsiveGrid extends React.Component {
-  render() {
-    // {lg: layout1, md: layout2, ...}
-    var layouts = getLayoutsFromSomewhere();
-    return (
-      <ResponsiveGridLayout className="layout" layouts={layouts}
-        breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
-        cols={{lg: 12, md: 10, sm: 6, xs: 4, xxs: 2}}>
-        <div key="1">1</div>
-        <div key="2">2</div>
-        <div key="3">3</div>
-      </ResponsiveGridLayout>
-    )
-  }
+```javascript
+var ResponsiveReactGridLayout = require('react-grid-layout').Responsive;
+//...
+render: function() {
+  // {lg: layout1, md: layout2, ...}
+  var layouts = getLayoutsFromSomewhere();
+  return (
+    <ResponsiveReactGridLayout className="layout" layouts={layouts}
+      breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
+      cols={{lg: 12, md: 10, sm: 6, xs: 4, xxs: 2}}>
+      <div key="1">1</div>
+      <div key="2">2</div>
+      <div key="3">3</div>
+    </ResponsiveReactGridLayout>
+  )
 }
 ```
 
@@ -198,25 +192,23 @@ Both `<ResponsiveReactGridLayout>` and `<ReactGridLayout>` take `width` to calcu
 positions on drag events. In simple cases a HOC `WidthProvider` can be used to automatically determine
 width upon initialization and window resize events.
 
-```js
-import { Responsive, WidthProvider } from 'react-grid-layout';
+```javascript
+import {Responsive, WidthProvider} from 'react-grid-layout';
+const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-const ResponsiveGridLayout = WidthProvider(Responsive);
-
-class MyResponsiveGrid extends React.Component {
-  render() {
-    // {lg: layout1, md: layout2, ...}
-    var layouts = getLayoutsFromSomewhere();
-    return (
-      <ResponsiveGridLayout className="layout" layouts={layouts}
-        breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
-        cols={{lg: 12, md: 10, sm: 6, xs: 4, xxs: 2}}>
-        <div key="1">1</div>
-        <div key="2">2</div>
-        <div key="3">3</div>
-      </ResponsiveGridLayout>
-    )
-  }
+//...
+render() {
+  // {lg: layout1, md: layout2, ...}
+  var layouts = getLayoutsFromSomewhere();
+  return (
+    <ResponsiveReactGridLayout className="layout" layouts={layouts}
+      breakpoints={{lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0}}
+      cols={{lg: 12, md: 10, sm: 6, xs: 4, xxs: 2}}>
+      <div key="1">1</div>
+      <div key="2">2</div>
+      <div key="3">3</div>
+    </ResponsiveReactGridLayout>
+  )
 }
 ```
 
@@ -234,7 +226,7 @@ listens to window `'resize'` events. If you need more power and flexibility, try
 
 RGL supports the following properties (see the source for the final word on this):
 
-```js
+```javascript
 //
 // Basic props
 //
@@ -330,7 +322,7 @@ onResizeStop: ItemCallback
 The responsive grid layout can be used instead. It supports all of the props above, excepting `layout`.
 The new properties and changes are:
 
-```js
+```javascript
 // {name: pxVal}, e.g. {lg: 1200, md: 996, sm: 768, xs: 480}
 // Breakpoint names are arbitrary but must match in the cols and layouts objects.
 breakpoints: ?Object = {lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0},
@@ -377,7 +369,7 @@ Any `<GridItem>` properties defined directly will take precedence over globally-
 example, if the layout has the property `isDraggable: false`, but the grid item has the prop `isDraggable: true`, the item
 will be draggable.
 
-```js
+```javascript
 {
 
   // A string corresponding to the component key
