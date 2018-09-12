@@ -208,7 +208,7 @@ var GridItem = function (_React$Component) {
         style.width = (0, _utils.perc)(pos.width / containerWidth);
       }
     }
-    style.fontSize = `${Math.round(Math.min(pos.width, pos.height))}px`;
+    style.fontSize = Math.round(Math.min(pos.width, pos.height)) + 'px';
 
     return style;
   };

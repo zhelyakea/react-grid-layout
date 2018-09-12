@@ -85,9 +85,11 @@ var ReactGridLayout = function (_React$Component) {
     }
     if (this.props.lockedRatio) {
       if (!_lodash2(nextProps.width, this.props.width)) {
-        const { cols, margin, containerPadding } = this.props;
-        const gridItemContainerPadding = containerPadding || margin;
-        const colWidth = (nextProps.width - (margin[0] * (cols - 1)) - (gridItemContainerPadding[0] * 2)) / cols;
+        var cols = this.props.cols;
+        var margin = this.props.margin;
+        var containerPadding = this.props.containerPadding;
+        var gridItemContainerPadding = containerPadding || margin;
+        var colWidth = (nextProps.width - (margin[0] * (cols - 1)) - (gridItemContainerPadding[0] * 2)) / cols;
         this.setState({
           colWidth: colWidth,
         });
@@ -102,7 +104,7 @@ var ReactGridLayout = function (_React$Component) {
 
 
   ReactGridLayout.prototype.containerHeight = function containerHeight() {
-    if (!this.props.autoSize) return; const rowHeight = this.props.lockedRatio ? this.state.colWidth / this.props.lockedRatio : this.props.rowHeight;
+    if (!this.props.autoSize) return; var rowHeight = this.props.lockedRatio ? this.state.colWidth / this.props.lockedRatio : this.props.rowHeight;
     var nbRow = (0, _utils.bottom)(this.state.layout);
     var containerPaddingY = this.props.containerPadding ? this.props.containerPadding[1] : this.props.margin[1];
     return Math.ceil(nbRow * rowHeight + (nbRow - 1) * this.props.margin[1] + containerPaddingY * 2) + 'px';
