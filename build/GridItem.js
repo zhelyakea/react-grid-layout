@@ -416,6 +416,7 @@ var GridItem = function (_React$Component) {
     var newChild = _react2.default.cloneElement(child, {
       className: (0, _classnames2.default)("react-grid-item", child.props.className, this.props.className, {
         role: this.props.role,
+        layer: this.props.layer,
         static: this.props.static,
         resizing: Boolean(this.state.resizing),
         "react-draggable": isDraggable,
@@ -456,6 +457,7 @@ GridItem.propTypes = {
   w: _propTypes2.default.number.isRequired,
   h: _propTypes2.default.number.isRequired,
   role: _propTypes2.default.number,
+  layer: _propTypes2.default.number,
 
   // All optional
   minW: function minW(props, propName) {
@@ -498,6 +500,7 @@ GridItem.propTypes = {
   isResizable: _propTypes2.default.bool.isRequired,
   static: _propTypes2.default.bool,
   role: _propTypes2.default.number,
+  layer: _propTypes2.default.number,
 
   // Use CSS transforms instead of top/left
   useCSSTransforms: _propTypes2.default.bool.isRequired,
@@ -510,6 +513,7 @@ GridItem.propTypes = {
   cancel: _propTypes2.default.string
 };
 GridItem.defaultProps = {
+  layer: 0,
   role: 0,
   className: "",
   cancel: "",

@@ -82,6 +82,7 @@ function cloneLayoutItem(layoutItem) {
     moved: Boolean(layoutItem.moved),
     static: Boolean(layoutItem.static),
     role: layoutItem.role,
+    layer: layoutItem.layer,
     // These can be null
     isDraggable: layoutItem.isDraggable,
     isResizable: layoutItem.isResizable
